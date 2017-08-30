@@ -10,9 +10,14 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.save
-    # redirect_to post_path(@post)
-    redirect_to @post
+    if @post.save
+      flash[:notice] = '성공적으로 글을 작성하였습니다!'
+      # redirect_to post_path(@post)
+      redirect_to @post
+    else
+      flash[:danger] = '글을 작성하지 못했습니다ㅠㅠ'
+      render :new
+    end
   end
   #Read
   def index
@@ -28,9 +33,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.update(post_params)
-
-    redirect_to @post
+    if @post.update(post_params)
+      flash[:notice] = '성공적으로 글을 수정하였습니다!'
+      redirect_to @post
+    else
+      flash[:danger] = '글을 수정하지 못했습니다ㅠㅠ'
+      render :edit
+    end
   end
   #Delete
   def destroy

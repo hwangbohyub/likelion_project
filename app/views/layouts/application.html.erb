@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>P0827</title>
+    <title>LikeLion</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -11,6 +10,12 @@
   <body>
     <%=render 'layouts/header'%>
     <div class="container">
+
+      <% flash.each do |msg_type, msg| %>
+        <% name = flash_msg(msg_type) %>
+        <%= content_tag(:div, msg, class: ['alert',"alert-#{name}"], role: 'alert')%>
+      <% end %>
+
     <%= yield %>
     </div>
   </body>

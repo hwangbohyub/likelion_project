@@ -5,9 +5,13 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    @comment.save
-
-    redirect_to post_path(params[:post_id])
+    if @comment.save
+      flash[:notice] = '성공적으로 댓글을 입력하였습니다!'
+      redirect_to post_path(params[:post_id])
+    else
+      flash[:danger] = '댓글을 입력해주세요ㅠㅠ'
+      redirect_to post_path(params[:post_id])
+    end
   end
 
   def destroy

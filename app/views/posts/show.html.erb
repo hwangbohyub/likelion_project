@@ -13,9 +13,9 @@
 <h4>
   <% if current_user == @post.user %>
     <%= link_to icon('pencil'), edit_post_path, class: 'text-success' %> |
-    <%= link_to icon('trash'), post_path, method: 'delete', class: 'text-warning' %> |
+    <%= link_to icon('trash'), post_path, method: 'delete', class: 'text-warning', data: {confirm: "정말로 삭제하시겠습니까?"} %> |
   <% end %>
-  <%= link_to icon('align-justify'), post_path  %>
+  <%= link_to icon('align-justify'), posts_path  %>
 </h4>
 <hr>
 <div>
@@ -42,7 +42,7 @@
         <h4 class="media-heading">
           <%=c.user.email%> <small><i><%=local_time(c.created_at)%></i></small>
           <% if current_user == c.user %>
-            <small><%= link_to icon('remove'), post_comment_path(@post, c), method: 'delete' %></small>
+            <small><%= link_to icon('remove'), post_comment_path(@post, c), method: 'delete', data: {confirm: "정말로 삭제하시겠습니까?"} %></small>
           <% end %>
         </h4>
         <p><%=c.comment%></p>
