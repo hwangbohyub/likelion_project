@@ -7,9 +7,16 @@ end
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap_form'
 # Devise
 gem 'devise'
 gem 'devise-bootstrap-views'
+# Tinymce
+gem 'tinymce-rails'
+# Local Time
+gem 'local_time', '~> 2.0'
+# Kaminari
+gem 'kaminari'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
 # Use sqlite3 as the database for Active Record

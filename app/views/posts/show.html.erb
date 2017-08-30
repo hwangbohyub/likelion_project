@@ -1,0 +1,53 @@
+<h1><%= @post.title %></h1>
+<hr>
+<h4>
+  <%= @post.user.email %> -
+  <span style="font-size:0.7em; color:#888888">
+    <%= icon 'time' %>
+    <%= local_time(@post.created_at) %>
+  </span>
+</h4>
+<hr>
+<p><%= @post.content.html_safe %></p>
+<br>
+<h4>
+  <% if current_user == @post.user %>
+    <%= link_to icon('pencil'), edit_post_path, class: 'text-success' %> |
+    <%= link_to icon('trash'), post_path, method: 'delete', class: 'text-warning' %> |
+  <% end %>
+  <%= link_to icon('align-justify'), post_path  %>
+</h4>
+<hr>
+<div>
+  <% if user_signed_in? %>
+    <div class="well">
+      <%= bootstrap_form_for @comment, url: post_comments_path(@post) do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :post_id, value: @post.id %>
+        <%= f.text_field :comment %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  <% else %>
+    <%= link_to "댓글을 작성하시려면 로그인을 하셔야합니다.", new_user_session_path, style: 'color:red' %>
+  <% end %>
+  <hr>
+  <div>
+    <% @comments.each do |c| %>
+    <div class="media">
+      <div class="media-left">
+        <img src="https://image.freepik.com/free-icon/github-character-logo_318-40635.jpg" class="media-object" style="width:45px">
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%=c.user.email%> <small><i><%=local_time(c.created_at)%></i></small>
+          <% if current_user == c.user %>
+            <small><%= link_to icon('remove'), post_comment_path(@post, c), method: 'delete' %></small>
+          <% end %>
+        </h4>
+        <p><%=c.comment%></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
