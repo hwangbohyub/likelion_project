@@ -8,6 +8,9 @@ end
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap_form'
+# i18n
+gem 'rails-i18n'
+gem 'devise-i18n'
 # Devise
 gem 'devise'
 gem 'devise-bootstrap-views'
